@@ -1,26 +1,28 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Ah</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ah</title>
+    <meta name="description" content="">
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+</head>
+<body>
+    <form action="/webpage" method="get">
+        <input type="text" name="url">
 
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+        <div>
+            <input type="radio" name="output-format" value="epub" checked>
+            <label for="contactChoice1">EPUB👑</label>
 
-    </head>
-    <body>
-        <form action="/webpage.epub" method="GET">
-            <input type="text" name="url"/>
-        </form>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">
-            You are using an <strong>outdated</strong> browser. Please
-            <a href="http://browsehappy.com/">upgrade your browser</a> to improve
-            your experience.
-            </p>
-        <![endif]-->
-    </body>
+            <input type="radio" name="output-format" value="mobi">
+            <label for="contactChoice1">MOBI🤮</label>
+        </div>
+
+        <input type="submit" value="lessgo"/>
+    </form>
+</body>
 </html>

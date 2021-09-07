@@ -4,6 +4,7 @@
 
 - leiningen: https://github.com/technomancy/leiningen
 - pandoc (needs to be in PATH): https://pandoc.org/installing.html
+- ebook-convert: https://calibre-ebook.com/download
 
 ## Running
 

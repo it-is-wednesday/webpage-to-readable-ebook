@@ -6,26 +6,39 @@
             [clj-http.client :as client]
             [clojure.java.shell :refer [sh]]
             [clojure.java.io :as io])
-  (:import [net.dankito.readability4j Readability4J]))
+  (:import [net.dankito.readability4j Readability4J]
+           [java.io File]))
 
 (selmer/set-resource-path! "public")
 
-(defn readable-html [dirty-html url]
-  (.. (new Readability4J url dirty-html) parse getContentWithUtf8Encoding))
+(defn make-readable [dirty-html url]
+  (.parse (new Readability4J url dirty-html)))
 
 (defn html->epub [html]
-  (sh "pandoc" "--from" "html" "--to" "epub" :in html :out-enc :bytes))
+  (:out (sh "pandoc" "--from" "html" "--to" "epub" :in html :out-enc :bytes)))
+
+(defn html->mobi [html]
+  (let [infile-path (.getPath (File/createTempFile "html" ".html"))
+        outfile (File/createTempFile "book" ".mobi")]
+    (spit infile-path html)
+    (sh "ebook-convert" infile-path (.getPath outfile))
+    outfile))
 
 (defroutes app-routes
   (GET "/" [] (selmer/render-file "index.html" {:name "hello"}))
-  (GET "/webpage.epub" [url]
-    (-> url client/get :body (readable-html url) html->epub :out io/input-stream))
+  (GET "/webpage" [url output-format]
+    (let [conversion-fn (case output-format
+                          "epub" html->epub
+                          "mobi" html->mobi)
+          readable (-> url client/get :body (make-readable url))
+          ebook-bytes (-> readable
+                          .getContentWithUtf8Encoding
+                          conversion-fn
+                          io/input-stream)
+          title (str (.getTitle readable) "." output-format)]
+      {:headers {"Content-Disposition" (format "attachment; filename=\"%s\"" title)}
+       :body ebook-bytes}))
   (route/not-found "Not Found"))
 
 (def app
   (wrap-defaults app-routes site-defaults))
-
-(comment
-  (selmer/render-file "index.html" {:name "hello"})
-
-  (html->epub "<html>a</html>"))
