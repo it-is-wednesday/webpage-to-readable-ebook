@@ -8,21 +8,38 @@
     <meta name="viewport" content=
     "width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous">
+    <style>
+     .main-form {
+         display: flex;
+         gap: 20px;
+         margin: 30px;
+         align-items: center;
+     }
+     .form-url-input {
+         flex: 2;
+         max-width: 600px;
+     }
+    </style>
 </head>
 <body>
-    <form action="/webpage" method="get">
-        <input type="text" name="url">
+    <form action="/webpage" method="get" class="main-form">
+        <input class="form-control form-url-input" type="text" name="url">
 
         <div>
-            <input type="radio" name="output-format" value="epub" checked>
-            <label for="contactChoice1">EPUB👑</label>
-
-            <input type="radio" name="output-format" value="mobi">
-            <label for="contactChoice1">MOBI🤮</label>
+            <input type="radio" id="output-format-epub" name="output-format" value="epub" checked>
+            <label for="output-format-epub">EPUB👑</label>
         </div>
 
-        <input type="submit" value="lessgo"/>
+        <div>
+            <input type="radio" id="output-format-mobi" name="output-format" value="mobi">
+            <label for="output-format-mobi">MOBI🤮</label>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="lessgo"/>
     </form>
 </body>
 </html>
