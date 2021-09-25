@@ -14,8 +14,14 @@
 (defn make-readable [dirty-html url]
   (.parse (new Readability4J url dirty-html)))
 
-(defn html->epub [html]
-  (:out (sh "pandoc" "--from" "html" "--to" "epub" :in html :out-enc :bytes)))
+(defn html->epub [title html]
+  (:out (sh "pandoc"
+            "--standalone"
+            "--from" "html"
+            "--to" "epub"
+            "--metadata" (str "title=" title)
+            :in html
+            :out-enc :bytes)))
 
 (defn html->mobi [html]
   (let [infile-path (.getPath (File/createTempFile "html" ".html"))
@@ -34,11 +40,11 @@
 (defroutes app-routes
   (GET "/" [] (selmer/render-file "index.html" {:name "hello"}))
   (GET "/webpage" [url output-format]
-    (let [conversion-fn (case output-format
-                          "epub" html->epub
+    (let [readable (-> url client/get :body (make-readable url))
+          conversion-fn (case output-format
+                          "epub" (partial html->epub (.getTitle readable))
                           "mobi" html->mobi
                           "pdf"  html->pdf)
-          readable (-> url client/get :body (make-readable url))
           ebook-bytes (-> readable
                           .getContentWithUtf8Encoding
                           conversion-fn
