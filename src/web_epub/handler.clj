@@ -24,12 +24,20 @@
     (sh "ebook-convert" infile-path (.getPath outfile))
     outfile))
 
+(defn html->pdf [html]
+  (let [infile-path (.getPath (File/createTempFile "html" ".html"))
+        outfile (File/createTempFile "book" ".pdf")]
+    (spit infile-path html)
+    (sh "wkhtmltopdf" infile-path (.getPath outfile))
+    outfile))
+
 (defroutes app-routes
   (GET "/" [] (selmer/render-file "index.html" {:name "hello"}))
   (GET "/webpage" [url output-format]
     (let [conversion-fn (case output-format
                           "epub" html->epub
-                          "mobi" html->mobi)
+                          "mobi" html->mobi
+                          "pdf"  html->pdf)
           readable (-> url client/get :body (make-readable url))
           ebook-bytes (-> readable
                           .getContentWithUtf8Encoding
