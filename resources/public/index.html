@@ -15,6 +15,7 @@
     <style>
      .main-form {
          display: flex;
+         flex-direction: column;
          gap: 20px;
          margin: 30px;
          align-items: center;
@@ -23,25 +24,36 @@
          flex: 2;
          max-width: 600px;
      }
+     .output-format-radio-buttons {
+         display: flex;
+         gap: 30px;
+     }
+     body {
+         margin: 0 auto;
+         max-width: 50em;
+     }
     </style>
 </head>
 <body>
     <form action="/webpage" method="get" class="main-form">
-        <input class="form-control form-url-input" type="text" name="url" required="true">
+        <input class="form-control form-url-input" type="text" name="url" required="true"
+               placeholder="Webpage URL to convert">
 
-        <div>
-            <input type="radio" id="output-format-epub" name="output-format" value="epub" checked>
-            <label for="output-format-epub">EPUB👑</label>
-        </div>
+        <div class="output-format-radio-buttons">
+            <div>
+                <input type="radio" id="output-format-epub" name="output-format" value="epub" checked>
+                <label for="output-format-epub">EPUB👑</label>
+            </div>
 
-        <div>
-            <input type="radio" id="output-format-mobi" name="output-format" value="mobi">
-            <label for="output-format-mobi">MOBI🤮</label>
-        </div>
+            <div>
+                <input type="radio" id="output-format-mobi" name="output-format" value="mobi">
+                <label for="output-format-mobi">MOBI🤮</label>
+            </div>
 
-        <div>
-            <input type="radio" id="output-format-pdf" name="output-format" value="pdf">
-            <label for="output-format-pdf">PDF🤨</label>
+            <div>
+                <input type="radio" id="output-format-pdf" name="output-format" value="pdf">
+                <label for="output-format-pdf">PDF🤨</label>
+            </div>
         </div>
 
         <input class="btn btn-primary" type="submit" value="lessgo"/>
