@@ -1,62 +1,81 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ah</title>
-    <meta name="description" content="">
-    <meta name="viewport" content=
-    "width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-          crossorigin="anonymous">
-    <style>
-     .main-form {
-         display: flex;
-         flex-direction: column;
-         gap: 20px;
-         margin: 30px;
-         align-items: center;
-     }
-     .form-url-input {
-         flex: 2;
-         max-width: 600px;
-     }
-     .output-format-radio-buttons {
-         display: flex;
-         gap: 30px;
-     }
-     body {
-         margin: 0 auto;
-         max-width: 50em;
-     }
-    </style>
-</head>
-<body>
-    <form action="/webpage" method="get" class="main-form">
-        <input class="form-control form-url-input" type="text" name="url" required="true"
-               placeholder="Webpage URL to convert">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Ah   </title>
+        <meta name="description" content="">
+        <meta name="viewport" content=
+                    "width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+              crossorigin="anonymous"/>
+        <style>
+         .main-form {
+             display: flex;
+             flex-direction: column;
+             gap: 20px;
+             margin: 30px;
+             align-items: center;
+         }
+         .form-url-input {
+             flex: 2;
+             max-width: 600px;
+         }
+         .output-format-radio-buttons {
+             display: flex;
+             flex-direction: column;
+             gap: 20px;
+         }
+         .number-text-input {
+             width: 125px;
+         }
+         body {
+             margin: 0 auto;
+             max-width: 50em;
+             background: url("static/bg.jpg");
+         }
+         .container-radio-and-submit {
+             display: flex;
+             gap: 20px;
+         }
+        </style>
+    </head>
+    <body>
+        <form action="/webpage" method="get" class="main-form">
+            <input class="form-control form-url-input" type="text" name="url" required="true"
+                   placeholder="Webpage URL to convert">
 
-        <div class="output-format-radio-buttons">
-            <div>
-                <input type="radio" id="output-format-epub" name="output-format" value="epub" checked>
-                <label for="output-format-epub">EPUB👑</label>
+            <div class="container-radio-and-submit">
+                <div class="output-format-radio-buttons">
+                    <div>
+                        <input type="radio" id="output-format-epub" name="output-format" value="epub" checked>
+                        <label for="output-format-epub">EPUB👑
+                        </label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="output-format-mobi" name="output-format" value="mobi">
+                        <label for="output-format-mobi">MOBI🤮
+                        </label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="output-format-pdf" name="output-format" value="pdf">
+                        <label for="output-format-pdf">PDF🤨
+                        </label>
+                        <input class="number-text-input" type="number" name="pdf-width"
+                               placeholder="width in mm">
+                        x
+                        <input class="number-text-input" type="number" name="pdf-height"
+                               placeholder="height in mm">
+                    </div>
+                </div>
+
+                <input class="btn btn-primary" type="submit" value="lessgo"/>
             </div>
-
-            <div>
-                <input type="radio" id="output-format-mobi" name="output-format" value="mobi">
-                <label for="output-format-mobi">MOBI🤮</label>
-            </div>
-
-            <div>
-                <input type="radio" id="output-format-pdf" name="output-format" value="pdf">
-                <label for="output-format-pdf">PDF🤨</label>
-            </div>
-        </div>
-
-        <input class="btn btn-primary" type="submit" value="lessgo"/>
-    </form>
-</body>
+        </form>
+    </body>
 </html>
