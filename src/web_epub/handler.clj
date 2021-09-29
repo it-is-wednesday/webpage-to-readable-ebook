@@ -30,21 +30,33 @@
     (sh "ebook-convert" infile-path (.getPath outfile))
     outfile))
 
-(defn html->pdf [html]
+(defn html->pdf
+  "Convert to PDF via wkhtmltopdf.
+
+  If both pdf-width and pdf-height are not an empty string, they will be passed as
+  --page-width and --page-height to the wkhtmltopdf command.
+
+  Returns a java.io.File object"
+ [pdf-width pdf-height html]
   (let [infile-path (.getPath (File/createTempFile "html" ".html"))
-        outfile (File/createTempFile "book" ".pdf")]
+        outfile (File/createTempFile "book" ".pdf")
+        cmd (concat ["wkhtmltopdf"]
+                    (if (and (not-empty pdf-width) (not-empty pdf-height))
+                      ["--page-width" pdf-width "--page-height" pdf-height]
+                      [])
+                    [infile-path (.getPath outfile)])]
     (spit infile-path html)
-    (sh "wkhtmltopdf" infile-path (.getPath outfile))
+    (apply sh (vec cmd))
     outfile))
 
 (defroutes app-routes
   (GET "/" [] (selmer/render-file "index.html" {}))
-  (GET "/webpage" [url output-format]
+  (GET "/webpage" [url output-format pdf-width pdf-height]
     (let [readable (-> url client/get :body (make-readable url))
           conversion-fn (case output-format
                           "epub" (partial html->epub (.getTitle readable))
                           "mobi" html->mobi
-                          "pdf"  html->pdf)
+                          "pdf"  (partial html->pdf pdf-width pdf-height))
           ebook-bytes (-> readable
                           .getContentWithUtf8Encoding
                           conversion-fn
