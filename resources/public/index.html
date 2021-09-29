@@ -7,75 +7,99 @@
         <meta name="description" content="">
         <meta name="viewport" content=
                     "width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-              crossorigin="anonymous"/>
+        <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet"/>
         <style>
          .main-form {
              display: flex;
              flex-direction: column;
              gap: 20px;
-             margin: 30px;
+             margin-top: 30px;
              align-items: center;
          }
          .form-url-input {
              flex: 2;
-             max-width: 600px;
          }
          .output-format-radio-buttons {
              display: flex;
              flex-direction: column;
              gap: 20px;
+             width:100%;
+             flex: 2;
          }
          .number-text-input {
-             width: 125px;
+             width: 150px;
+             height: 30px;
          }
          body {
              margin: 0 auto;
              max-width: 50em;
              background: url("static/bg.jpg");
+             font-family: "Helvetica", "Arial", sans-serif;
+             line-height: 1.5;
+             padding: 1em;
          }
          .container-radio-and-submit {
              display: flex;
              gap: 20px;
+             width: 100%;
+         }
+         @media(max-width: 800px) {
+             .container-radio-and-submit {
+                 flex-direction: column;
+             }
+         }
+         .page {
+             background: white;
          }
         </style>
     </head>
     <body>
-        <form action="/webpage" method="get" class="main-form">
-            <input class="form-control form-url-input" type="text" name="url" required="true"
-                   placeholder="Webpage URL to convert">
+        <div class="page nes-container is-rounded">
+            <h3>
+                Webpage ➜ readable EPUB/MOBI/PDF
+            </h3>
+            A boring webpage downloader with clutter removal done by
+            <a href="https://github.com/dankito/Readability4J">Readability4J</a>, which will
+            get you roughly the same readable pages that
+            <a href="https://support.mozilla.org/en-US/kb/firefox-reader-view-clutter-free-web-pages">
+                Firefox's Reader View</a> will produce:)
+            <form action="/webpage" method="get" class="main-form">
+                <input class="form-url-input nes-input" type="text" name="url" required="true"
+                       placeholder="Webpage URL to convert">
 
-            <div class="container-radio-and-submit">
-                <div class="output-format-radio-buttons">
-                    <div>
-                        <input type="radio" id="output-format-epub" name="output-format" value="epub" checked>
-                        <label for="output-format-epub">EPUB👑
+                <div class="container-radio-and-submit">
+                    <div class="output-format-radio-buttons nes-container is-rounded">
+                        <label for="output-format-epub">
+                            <input type="radio" id="output-format-epub" name="output-format"
+                                   value="epub" checked class="nes-radio">
+                            <span>EPUB 👑</span>
+                        </label>
+
+                        <label for="output-format-mobi">
+                            <input type="radio" id="output-format-mobi" name="output-format"
+                                   value="mobi" class="nes-radio">
+                            <span>MOBI 🤮</span>
+                        </label>
+
+                        <label for="output-format-pdf">
+                            <input type="radio" id="output-format-pdf" name="output-format"
+                                   value="pdf" class="nes-radio">
+                            <span>PDF 🤨</span>
                         </label>
                     </div>
 
-                    <div>
-                        <input type="radio" id="output-format-mobi" name="output-format" value="mobi">
-                        <label for="output-format-mobi">MOBI🤮
-                        </label>
+                    <div class="nes-container is-rounded">
+                        <h4>Optional dimensions (only for PDF)</h4>
+                        <input class="number-text-input nes-input" type="number" name="pdf-size"
+                               placeholder="height (mm)">
+                        <div style="height: 10px;"></div>
+                        <input class="number-text-input nes-input" type="number" name="pdf-size"
+                               placeholder="width (mm)">
                     </div>
 
-                    <div>
-                        <input type="radio" id="output-format-pdf" name="output-format" value="pdf">
-                        <label for="output-format-pdf">PDF🤨
-                        </label>
-                        <input class="number-text-input" type="number" name="pdf-width"
-                               placeholder="width in mm">
-                        x
-                        <input class="number-text-input" type="number" name="pdf-height"
-                               placeholder="height in mm">
-                    </div>
+                    <input class="nes-btn is-primary" type="submit" value="lessgo"/>
                 </div>
-
-                <input class="btn btn-primary" type="submit" value="lessgo"/>
-            </div>
-        </form>
+            </form>
+        </div>
     </body>
 </html>

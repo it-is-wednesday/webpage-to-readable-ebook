@@ -38,7 +38,7 @@
     outfile))
 
 (defroutes app-routes
-  (GET "/" [] (selmer/render-file "index.html" {:name "hello"}))
+  (GET "/" [] (selmer/render-file "index.html" {}))
   (GET "/webpage" [url output-format]
     (let [readable (-> url client/get :body (make-readable url))
           conversion-fn (case output-format
@@ -52,6 +52,7 @@
           title (str (.getTitle readable) "." output-format)]
       {:headers {"Content-Disposition" (format "attachment; filename=\"%s\"" title)}
        :body ebook-bytes}))
+  (route/resources "/static")
   (route/not-found "Not Found"))
 
 (def app
