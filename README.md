@@ -2,8 +2,10 @@
 
 ## Prerequisites
 
-- leiningen: https://github.com/technomancy/leiningen
-- pandoc (needs to be in PATH): https://pandoc.org/installing.html
+Leiningen for project management: https://github.com/technomancy/leiningen
+
+These programs need to be available on PATH with these exact names on runtime:
+- pandoc: https://pandoc.org/installing.html
 - ebook-convert: https://calibre-ebook.com/download
 - wkhtmltopdf: https://wkhtmltopdf.org/downloads.html
 
@@ -11,4 +13,8 @@
 
 To start a web server for the application, run:
 
-    lein ring server
+    lein ring server-headless
+
+## Building JAR file
+
+    lein ring uberjar
