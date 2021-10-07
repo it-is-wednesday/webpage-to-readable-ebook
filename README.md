@@ -18,3 +18,8 @@ To start a web server for the application, run:
 ## Building JAR file
 
     lein ring uberjar
+
+## Credits
+
+[Readability4J](https://github.com/dankito/Readability4J) is doing all the heavy lifting here. Go
+star it
