@@ -1,4 +1,4 @@
-(defproject web-epub "0.1.0"
+(defproject web-ebook "0.1.0"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
@@ -10,6 +10,6 @@
                  [selmer "1.12.44"]
                  [clj-http "3.12.3"]]
   :plugins [[lein-ring "0.12.5"]]
-  :ring {:handler web-epub.handler/app
+  :ring {:handler web-ebook.handler/app
          :nrepl {:start? true :port 20612}}
   :profiles {:dev {:dependencies [[ring/ring-mock "0.3.2"]]}})

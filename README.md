@@ -1,4 +1,4 @@
-# web-epub
+# web-ebook
 
 ## Prerequisites
 

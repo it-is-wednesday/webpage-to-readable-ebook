@@ -1,4 +1,4 @@
-(ns web-epub.handler
+(ns web-ebook.handler
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
