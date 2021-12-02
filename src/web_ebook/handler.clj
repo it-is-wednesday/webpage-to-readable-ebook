@@ -3,7 +3,7 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [selmer.parser :as selmer]
-            [clj-http.client :as client]
+            [clj-http.client :as http]
             [clojure.java.shell :refer [sh]]
             [clojure.java.io :as io])
   (:import [net.dankito.readability4j Readability4J]
@@ -37,7 +37,7 @@
   --page-width and --page-height to the wkhtmltopdf command.
 
   Returns a java.io.File object"
- [pdf-width pdf-height html]
+  [pdf-width pdf-height html]
   (let [infile-path (.getPath (File/createTempFile "html" ".html"))
         outfile (File/createTempFile "book" ".pdf")
         cmd (concat ["wkhtmltopdf"]
@@ -52,7 +52,7 @@
 (defroutes app-routes
   (GET "/" [] (selmer/render-file "index.html" {}))
   (GET "/webpage" [url output-format pdf-width pdf-height]
-    (let [readable (-> url client/get :body (make-readable url))
+    (let [readable (-> url http/get :body (make-readable url))
           conversion-fn (case output-format
                           "epub" (partial html->epub (.getTitle readable))
                           "mobi" html->mobi
