@@ -6,7 +6,7 @@ Leiningen for project management: https://github.com/technomancy/leiningen
 
 These programs need to be available on PATH with these exact names on runtime:
 - pandoc: https://pandoc.org/installing.html
-- ebook-convert: https://calibre-ebook.com/download
+- ebook-convert: https://calibre-ebook.com/downloadולטחאכעחייעי
 - wkhtmltopdf: https://wkhtmltopdf.org/downloads.html
 
 ## Running
