@@ -9,15 +9,21 @@ These programs need to be available on PATH with these exact names on runtime:
 - ebook-convert: https://calibre-ebook.com/download
 - wkhtmltopdf: https://wkhtmltopdf.org/downloads.html
 
-## Running
+## Development
 
-To start a web server for the application, run:
+To start a hot-reloading web server for the application, run:
+``` shell
+lein ring server-headless
+```
 
-    lein ring server-headless
+## Deployment
 
-## Building JAR file
+Deploying a jar is probably the most straightforward:
+``` shell
+lein ring uberjar
+```
 
-    lein ring uberjar
+A containerized solution is also an option, however keep in mind all of this project's dependencies are quite huge, and the container yielded is around 2GB
 
 ## Credits
 
